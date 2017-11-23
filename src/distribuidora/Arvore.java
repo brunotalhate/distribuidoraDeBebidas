@@ -404,5 +404,85 @@ public class Arvore {
 	}
 	
 	
+	public Item [] menorEstoque() {
+		if(this.raiz != null) {
+			int []n= new int[1];
+			n[0]=0;
+			Item [] vet = new Item[this.quantNos];
+			int []menorEstoque = new int[1];
+			menorEstoque[0] = this.raiz.getInfo().getEstoque();
+			vet = auxMenorEstoque(this.raiz,vet,n,menorEstoque);
+			for (int i = this.quantNos - 1; i>0; i--) {
+				if(i>=n[0]) {
+					vet[i] = null;
+				}
+			}
+			return vet;
+			
+		}else {
+			return null;
+		}
+	}
+	private Item [] auxMenorEstoque(NoArv arv, Item [] vet, int []n, int []menorEstoque) {
+		if (arv != null) {
+			vet = auxMenorEstoque (arv.getEsq(),vet,n,menorEstoque);
+			
+			if(arv.getInfo().getEstoque() < menorEstoque[0]) {
+				n[0]=0;
+				vet[n[0]] = arv.getInfo();
+				n[0]++;
+			}else if(arv.getInfo().getEstoque() == menorEstoque[0]) {
+				vet[n[0]] = arv.getInfo();
+				n[0]++;
+			}	
+			
+			vet = auxMenorEstoque (arv.getDir(),vet,n,menorEstoque);
+		}
+		return vet;
+	}
+	
+	
+	public Item [] maiorEstoque() {
+		if(this.raiz != null) {
+			int []n= new int[1];
+			n[0]=0;
+			Item [] vet = new Item[this.quantNos];
+			int []maiorEstoque = new int[1];
+			maiorEstoque[0] = this.raiz.getInfo().getEstoque();
+			vet = auxMaiorEstoque(this.raiz,vet,n,maiorEstoque);
+			for (int i = this.quantNos - 1; i>0; i--) {
+				if(i>=n[0]) {
+					vet[i] = null;
+				}
+			}
+			return vet;			
+		}else {
+			return null;
+		}
+	}	
+	private Item [] auxMaiorEstoque(NoArv arv, Item [] vet, int []n, int []maiorEstoque) {
+		if (arv != null) {
+			vet = auxMaiorEstoque (arv.getEsq(),vet,n,maiorEstoque);
+			
+			if(arv.getInfo().getEstoque() > maiorEstoque[0]) {
+				n[0]=0;
+				vet[n[0]] = arv.getInfo();
+				n[0]++;
+			}else if(arv.getInfo().getEstoque() == maiorEstoque[0]) {
+				vet[n[0]] = arv.getInfo();
+				n[0]++;
+			}	
+			
+			vet = auxMaiorEstoque (arv.getDir(),vet,n,maiorEstoque);
+		}
+		return vet;
+	}
+	
+	
+	
+	
+	
+	
+	
 }
 
