@@ -20,139 +20,6 @@ public class Arvore {
 		return this.quantNos;
 	}
 
-
-
-/*
-
-	public boolean inserir (Item elem){
-		if (pesquisar (elem.getChave())){
-			return false;
-		}else{
-			this.raiz = inserir (elem, this.raiz);
-			this.quantNos++;
-			return true;
-		}
-	}
-	public NoArv inserir (Item elem, NoArv no){
-		if (no == null){
-			NoArv novo = new NoArv(elem);
-			return novo;
-		}else {
-			if (elem.getChave() < no.getInfo().getChave()){
-				no.setEsq(inserir(elem, no.getEsq()));
-				return no;
-			}else{
-				no.setDir(inserir(elem, no.getDir()));
-				return no;
-			}
-		}
-	}
-	public boolean pesquisar (int chave){
-		if (pesquisar (chave, this.raiz)!= null){
-			return true;
-		}else{
-			return false;
-		}
-	}
-	private NoArv pesquisar (int chave, NoArv no){
-		if (no != null){
-			if (chave < no.getInfo().getChave()){
-				no = pesquisar (chave, no.getEsq());
-			}else{
-				if (chave > no.getInfo().getChave()){
-					no = pesquisar (chave, no.getDir());
-				}
-			}
-		}
-		return no;
-	}
-	public boolean remover (int chave){
-		if (pesquisar (chave, this.raiz) != null){
-			this.raiz = remover (chave, this.raiz);
-			this.quantNos--;
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-	public NoArv remover (int chave, NoArv arv){
-		if (chave < arv.getInfo().getChave()){
-			arv.setEsq(remover (chave, arv.getEsq()));
-		}else{
-			if (chave > arv.getInfo().getChave()){
-				arv.setDir(remover (chave, arv.getDir()));
-			}else{
-				if (arv.getDir()== null){
-					return arv.getEsq();
-				}else{
-					if (arv.getEsq() == null){ 
-						return arv.getDir();
-					}else{
-						arv.setEsq(Arrumar (arv, arv.getEsq()));
-					}
-				}
-			}
-		}
-		return arv;
-	}
-	private NoArv Arrumar (NoArv arv, NoArv maior){
-		if (maior.getDir() != null){
-			maior.setDir(Arrumar (arv, maior.getDir()));
-		}
-		else{
-			arv.setInfo(maior.getInfo());
-			maior = maior.getEsq();
-		}
-		return maior;
-	}
-	public Item [] CamCentral (){
-		int []n= new int[1];
-		n[0]=0;
-		Item [] vet = new Item[this.quantNos];
-		return (FazCamCentral (this.raiz, vet, n));
-	}
-	private Item [] FazCamCentral (NoArv arv, Item [] vet, int []n){
-		if (arv != null) {
-			vet = FazCamCentral (arv.getEsq(),vet,n);
-			vet[n[0]] = arv.getInfo();
-			n[0]++;
-			vet = FazCamCentral (arv.getDir(),vet,n);
-		}
-		return vet;
-	}
-	public Item [] CamPreFixado (){
-		int []n= new int[1];
-		n[0]=0;
-		Item [] vet = new Item[this.quantNos];
-		return (FazCamPreFixado (this.raiz, vet, n));
-	}
-	private Item [] FazCamPreFixado (NoArv arv, Item [] vet, int []n){
-		if (arv != null) {
-			vet[n[0]] = arv.getInfo();
-			n[0]++;
-			vet = FazCamPreFixado (arv.getEsq(), vet,n);
-			vet = FazCamPreFixado (arv.getDir(), vet,n);
-		}
-		return vet;
-	}
-	public Item [] CamPosFixado (){
-		int []n= new int[1];
-		n[0]=0;
-		Item [] vet = new Item[this.quantNos];
-		return (FazCamPosFixado (this.raiz, vet, n));
-	}
-	private Item [] FazCamPosFixado (NoArv arv, Item[] vet, int []n){
-		if (arv != null) {
-			vet = FazCamPosFixado (arv.getEsq(), vet,n);
-			vet = FazCamPosFixado (arv.getDir(), vet,n);
-			vet[n[0]] = arv.getInfo();
-			n[0]++;
-		}
-		return vet;
-	}
-	
-*/	
 	
 	public boolean inserir (Item elem){
 	    if (pesquisar (elem.getCodigoDeBarra())){ //Pesquisar se há algum produto igual na arvore
@@ -195,9 +62,7 @@ public class Arvore {
 	        }
 	    }
 	    return no;
-	}
-	
-	
+	}	
 	
 	
 	public Item pesquisarCodeBar (int codeBar){
@@ -244,7 +109,7 @@ public class Arvore {
 	public Item [] pesquisarFabricante (String fabricante) {
 		int []n = new int[1];
 		n[0] = 0;
-		Item [] vet = new Item[this.quantNos];
+		Item [] vet = new Item[this.quantNos + 1];
 		return auxPesquisarFabricante(this.raiz, vet, n, fabricante);
 	}
 	private Item [] auxPesquisarFabricante (NoArv arv, Item [] vet, int [] n, String fabric) {
@@ -263,7 +128,7 @@ public class Arvore {
 	public Item [] pesquisarValor (float valor) {
 		int []n = new int[1];
 		n[0] = 0;
-		Item [] vet = new Item[this.quantNos];
+		Item [] vet = new Item[this.quantNos + 1];
 		return auxPesquisarValor(this.raiz, vet, n, valor);
 	}
 	private Item [] auxPesquisarValor (NoArv arv, Item [] vet, int [] n, float valor) {
@@ -282,7 +147,7 @@ public class Arvore {
 	public Item [] pesquisarEstoque (int estoque) {
 		int []n = new int[1];
 		n[0] = 0;
-		Item [] vet = new Item[this.quantNos];
+		Item [] vet = new Item[this.quantNos + 1];
 		return auxPesquisarEstoque(this.raiz, vet, n, estoque);
 	}
 	private Item [] auxPesquisarEstoque (NoArv arv, Item [] vet, int [] n, int estoque) {
@@ -320,12 +185,13 @@ public class Arvore {
 	
 	public boolean removerFabricante (String fabricante) {
 		if(pesquisarFabricante(fabricante) != null) {		
-			
-			Item [] vetor= new Item[this.quantNos];
+			int i = 0;
+			Item [] vetor= new Item[this.quantNos + 1];
 			vetor = pesquisarFabricante(fabricante);
 			
-			for(int i = 0; i < this.quantNos; i++) {
+			while(vetor[i] != null) {
 				this.raiz = remover(vetor[i].getCodigoDeBarra(), this.raiz);
+				i++;
 			}
 			
 			this.quantNos--;
@@ -337,12 +203,13 @@ public class Arvore {
 	
 	public boolean removerValor (float valor) {
 		if(pesquisarValor(valor) != null) {
-			
-			Item [] vetor= new Item[this.quantNos];
+			int i = 0;
+			Item [] vetor= new Item[this.quantNos + 1];
 			vetor = pesquisarValor(valor);
 			
-			for(int i = 0; i < this.quantNos; i++) {
+			while(vetor[i] != null) {
 				this.raiz = remover(vetor[i].getCodigoDeBarra(), this.raiz);
+				i++;
 			}
 			
 			this.quantNos--;
@@ -354,12 +221,13 @@ public class Arvore {
 	
 	public boolean removerEstoque (int estoque) {
 		if(pesquisarEstoque(estoque) != null) {
+			int i = 0;
+			Item [] vetor= new Item[this.quantNos + 1];
+			vetor = pesquisarEstoque(estoque);			
 			
-			Item [] vetor= new Item[this.quantNos];
-			vetor = pesquisarEstoque(estoque);
-			
-			for(int i = 0; i < this.quantNos; i++) {
+			while(vetor[i] != null) {
 				this.raiz = remover(vetor[i].getCodigoDeBarra(), this.raiz);
+				i++;
 			}
 			
 			this.quantNos--;
@@ -408,7 +276,7 @@ public class Arvore {
 		if(this.raiz != null) {
 			int []n= new int[1];
 			n[0]=0;
-			Item [] vet = new Item[this.quantNos];
+			Item [] vet = new Item[this.quantNos + 1];
 			int []menorEstoque = new int[1];
 			menorEstoque[0] = this.raiz.getInfo().getEstoque();
 			vet = auxMenorEstoque(this.raiz,vet,n,menorEstoque);
@@ -446,7 +314,7 @@ public class Arvore {
 		if(this.raiz != null) {
 			int []n= new int[1];
 			n[0]=0;
-			Item [] vet = new Item[this.quantNos];
+			Item [] vet = new Item[this.quantNos + 1];
 			int []maiorEstoque = new int[1];
 			maiorEstoque[0] = this.raiz.getInfo().getEstoque();
 			vet = auxMaiorEstoque(this.raiz,vet,n,maiorEstoque);
@@ -479,10 +347,218 @@ public class Arvore {
 	}
 	
 	
+	public Item [] parteNome (String bebida){
+		int []n= new int[1];
+		n[0]=0;
+		Item [] vet = new Item[this.quantNos + 1];
+		return (auxParteNome (this.raiz, vet, n, bebida));
+	}
+	private Item [] auxParteNome (NoArv arv, Item [] vet, int []n, String bebida){
+		if (arv != null) {
+			vet = auxParteNome (arv.getEsq(),vet,n,bebida);
+			
+			if (arv.getInfo().getNome().contains(bebida)) {
+				vet[n[0]] = arv.getInfo();
+				n[0]++;
+			}
+			
+			vet = auxParteNome (arv.getDir(),vet,n,bebida);
+		}
+		return vet;
+	}	
 	
 	
+	public Item [] parteFabricante (String fabric){
+		int []n= new int[1];
+		n[0]=0;
+		Item [] vet = new Item[this.quantNos + 1];
+		return (auxParteFabricante (this.raiz, vet, n, fabric));
+	}
+	private Item [] auxParteFabricante (NoArv arv, Item [] vet, int []n, String fabric){
+		if (arv != null) {
+			vet = auxParteFabricante (arv.getEsq(),vet,n,fabric);
+			
+			if (arv.getInfo().getFabricante().contains(fabric)) {
+				vet[n[0]] = arv.getInfo();
+				n[0]++;
+			}
+			
+			vet = auxParteFabricante (arv.getDir(),vet,n,fabric);
+		}
+		return vet;
+	}
+		
+	
+	public Item [] estoqueMaiorQue(int estoque) {
+		int []n= new int[1];
+		n[0]=0;
+		Item [] vet = new Item[this.quantNos + 1];
+		return auxEstoqueMaiorQue(this.raiz,vet,n,estoque);
+	}
+	private Item [] auxEstoqueMaiorQue(NoArv arv, Item [] vet, int []n, int estoque) {
+		if (arv != null) {
+			vet = auxEstoqueMaiorQue (arv.getEsq(),vet,n,estoque);
+			
+			if(arv.getInfo().getEstoque() > estoque) {
+				vet[n[0]] = arv.getInfo();
+				n[0]++;
+			}			
+			
+			vet = auxEstoqueMaiorQue (arv.getDir(),vet,n,estoque);
+		}
+		return vet;		
+	}
 	
 	
+	public Item [] estoqueMenorQue(int estoque) {
+		int []n= new int[1];
+		n[0]=0;
+		Item [] vet = new Item[this.quantNos + 1];
+		return auxEstoqueMenorQue(this.raiz,vet,n,estoque);
+	}
+	private Item [] auxEstoqueMenorQue(NoArv arv, Item [] vet, int []n, int estoque) {
+		if (arv != null) {
+			vet = auxEstoqueMenorQue (arv.getEsq(),vet,n,estoque);
+			
+			if(arv.getInfo().getEstoque() < estoque) {
+				vet[n[0]] = arv.getInfo();
+				n[0]++;
+			}			
+			
+			vet = auxEstoqueMenorQue (arv.getDir(),vet,n,estoque);
+		}
+		return vet;		
+	}
 	
+	
+	public Item [] valorMaiorQue(float valor) {
+		int []n= new int[1];
+		n[0]=0;
+		Item [] vet = new Item[this.quantNos + 1];
+		return auxValorMaiorQue(this.raiz,vet,n,valor);
+	}
+	private Item [] auxValorMaiorQue(NoArv arv, Item [] vet, int []n, float valor) {
+		if (arv != null) {
+			vet = auxValorMaiorQue (arv.getEsq(),vet,n,valor);
+			
+			if(arv.getInfo().getValor() > valor) {
+				vet[n[0]] = arv.getInfo();
+				n[0]++;
+			}			
+			
+			vet = auxValorMaiorQue (arv.getDir(),vet,n,valor);
+		}
+		return vet;
+	}
+	
+	
+	public Item [] valorMenorQue(float valor) {
+		int []n= new int[1];
+		n[0]=0;
+		Item [] vet = new Item[this.quantNos + 1];
+		return auxValorMenorQue(this.raiz,vet,n,valor);
+	}
+	private Item [] auxValorMenorQue(NoArv arv, Item [] vet, int []n, float valor) {
+		if (arv != null) {
+			vet = auxValorMenorQue (arv.getEsq(),vet,n,valor);
+			
+			if(arv.getInfo().getValor() < valor) {
+				vet[n[0]] = arv.getInfo();
+				n[0]++;
+			}			
+			
+			vet = auxValorMenorQue (arv.getDir(),vet,n,valor);
+		}
+		return vet;
+	}
+
+	
+	public Item [] valorEntre(float maiorValor, float menorValor) {
+		int []n= new int[1];
+		n[0]=0;
+		Item [] vet = new Item[this.quantNos + 1];
+		return auxValorEntre(this.raiz,vet,n,maiorValor,menorValor);
+	}
+	private Item [] auxValorEntre(NoArv arv, Item [] vet, int []n, float maiorValor, float menorValor) {
+		if (arv != null) {
+			vet = auxValorEntre (arv.getEsq(),vet,n,maiorValor,menorValor);
+			
+			if(arv.getInfo().getValor() > menorValor && arv.getInfo().getValor() < maiorValor) {
+				vet[n[0]] = arv.getInfo();
+				n[0]++;
+			}			
+			
+			vet = auxValorEntre (arv.getDir(),vet,n,maiorValor,menorValor);
+		}
+		return vet;
+	}	
+	
+	
+	public boolean alterarCodeBar (int old, int newdado){
+		if(pesquisarCodeBar(old) != null) {
+			Item mod = pesquisarCodeBar(old);			
+	        mod.setCodigoDeBarra(newdado);
+	        return true;
+		}else {
+			return false;
+		}        
+    }
+	
+    
+    public boolean alterarNome (String old, String newdado){
+    	if(pesquisarNome(old) != null) {
+    		Item mod = pesquisarNome(old);
+            mod.setNome(newdado);
+            return true;
+    	}else {
+    		return false;
+    	}
+        
+    }
+    
+    
+    public boolean alterarFabricante (String old, String newdado){
+    	int i = 0;
+    	Item [] vet = new Item[this.quantNos + 1];
+		vet = pesquisarFabricante(old);
+    	if(vet[0] != null) {    		
+    		while(vet[i] != null) {
+    			vet[i].setFabricante(newdado);
+    		}    		
+            return true;
+    	}else {
+    		return false;
+    	}        
+    }
+    
+    
+    public boolean alterarValor (float old, float newdado){
+    	int i = 0;
+    	Item [] vet = new Item[this.quantNos + 1];
+		vet = pesquisarValor(old);
+    	if(vet[0] != null) {    		
+    		while(vet[i] != null) {
+    			vet[i].setValor(newdado);
+    		}    		
+            return true;
+    	}else {
+    		return false;
+    	}       
+    }
+    
+    
+    public boolean alterarEstoque (int old, int newdado){
+    	int i = 0;
+    	Item [] vet = new Item[this.quantNos + 1];
+		vet = pesquisarEstoque(old);
+    	if(vet[0] != null) {    		
+    		while(vet[i] != null) {
+    			vet[i].setEstoque(newdado);
+    		}    		
+            return true;
+    	}else {
+    		return false;
+    	}     
+    }	
 }
 
